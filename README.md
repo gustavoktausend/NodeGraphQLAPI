@@ -6,7 +6,7 @@ O seu trabalho é descobrir em quais planetas pode instalar seus novos postos de
 Para isso:
 
 utilize a API da Arcsecond, o que te possibilita buscar os planetas fora do sistema solar!(mais especificamente batendo em GET /exoplanets/)
-só mostre os planetas com gravidade alta, os dados não mostram exatamente qual gravidade o planeta tem, mas a Voltbras fez os cálculos e os planetas ideais(com gravidade alta),
+só mostre os planetas com gravidade alta,
 são aproximadamente os mesmos que têm sua massa(exoplanet.mass.value) maior que 25 M_jup (exoplanet.mass.unit)
 
 Requisitos
