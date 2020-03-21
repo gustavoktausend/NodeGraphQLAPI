@@ -1,0 +1,6 @@
+type Planet {
+  id: ID! @id
+  name: String!
+  mass: Float!
+  hasStation: Boolean!
+}
