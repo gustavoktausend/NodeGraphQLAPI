@@ -1,6 +1,4 @@
-type Planet {
-  id: ID! @id
-  name: String!
-  mass: Float!
-  hasStation: Boolean!
+type Station {
+    id: ID! @id
+    planetName: String!
 }

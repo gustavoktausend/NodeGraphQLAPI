@@ -3,7 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregatePlanet {
+/* GraphQL */ `type AggregateStation {
   count: Int!
 }
 
@@ -14,12 +14,12 @@ type BatchPayload {
 scalar Long
 
 type Mutation {
-  createPlanet(data: PlanetCreateInput!): Planet!
-  updatePlanet(data: PlanetUpdateInput!, where: PlanetWhereUniqueInput!): Planet
-  updateManyPlanets(data: PlanetUpdateManyMutationInput!, where: PlanetWhereInput): BatchPayload!
-  upsertPlanet(where: PlanetWhereUniqueInput!, create: PlanetCreateInput!, update: PlanetUpdateInput!): Planet!
-  deletePlanet(where: PlanetWhereUniqueInput!): Planet
-  deleteManyPlanets(where: PlanetWhereInput): BatchPayload!
+  createStation(data: StationCreateInput!): Station!
+  updateStation(data: StationUpdateInput!, where: StationWhereUniqueInput!): Station
+  updateManyStations(data: StationUpdateManyMutationInput!, where: StationWhereInput): BatchPayload!
+  upsertStation(where: StationWhereUniqueInput!, create: StationCreateInput!, update: StationUpdateInput!): Station!
+  deleteStation(where: StationWhereUniqueInput!): Station
+  deleteManyStations(where: StationWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -39,80 +39,73 @@ type PageInfo {
   endCursor: String
 }
 
-type Planet {
+type Query {
+  station(where: StationWhereUniqueInput!): Station
+  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station]!
+  stationsConnection(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationConnection!
+  node(id: ID!): Node
+}
+
+type Station {
   id: ID!
-  name: String!
-  mass: Float!
-  hasStation: Boolean!
+  planetName: String!
 }
 
-type PlanetConnection {
+type StationConnection {
   pageInfo: PageInfo!
-  edges: [PlanetEdge]!
-  aggregate: AggregatePlanet!
+  edges: [StationEdge]!
+  aggregate: AggregateStation!
 }
 
-input PlanetCreateInput {
+input StationCreateInput {
   id: ID
-  name: String!
-  mass: Float!
-  hasStation: Boolean!
+  planetName: String!
 }
 
-type PlanetEdge {
-  node: Planet!
+type StationEdge {
+  node: Station!
   cursor: String!
 }
 
-enum PlanetOrderByInput {
+enum StationOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  mass_ASC
-  mass_DESC
-  hasStation_ASC
-  hasStation_DESC
+  planetName_ASC
+  planetName_DESC
 }
 
-type PlanetPreviousValues {
+type StationPreviousValues {
   id: ID!
-  name: String!
-  mass: Float!
-  hasStation: Boolean!
+  planetName: String!
 }
 
-type PlanetSubscriptionPayload {
+type StationSubscriptionPayload {
   mutation: MutationType!
-  node: Planet
+  node: Station
   updatedFields: [String!]
-  previousValues: PlanetPreviousValues
+  previousValues: StationPreviousValues
 }
 
-input PlanetSubscriptionWhereInput {
+input StationSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: PlanetWhereInput
-  AND: [PlanetSubscriptionWhereInput!]
-  OR: [PlanetSubscriptionWhereInput!]
-  NOT: [PlanetSubscriptionWhereInput!]
+  node: StationWhereInput
+  AND: [StationSubscriptionWhereInput!]
+  OR: [StationSubscriptionWhereInput!]
+  NOT: [StationSubscriptionWhereInput!]
 }
 
-input PlanetUpdateInput {
-  name: String
-  mass: Float
-  hasStation: Boolean
+input StationUpdateInput {
+  planetName: String
 }
 
-input PlanetUpdateManyMutationInput {
-  name: String
-  mass: Float
-  hasStation: Boolean
+input StationUpdateManyMutationInput {
+  planetName: String
 }
 
-input PlanetWhereInput {
+input StationWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -127,48 +120,31 @@ input PlanetWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  mass: Float
-  mass_not: Float
-  mass_in: [Float!]
-  mass_not_in: [Float!]
-  mass_lt: Float
-  mass_lte: Float
-  mass_gt: Float
-  mass_gte: Float
-  hasStation: Boolean
-  hasStation_not: Boolean
-  AND: [PlanetWhereInput!]
-  OR: [PlanetWhereInput!]
-  NOT: [PlanetWhereInput!]
+  planetName: String
+  planetName_not: String
+  planetName_in: [String!]
+  planetName_not_in: [String!]
+  planetName_lt: String
+  planetName_lte: String
+  planetName_gt: String
+  planetName_gte: String
+  planetName_contains: String
+  planetName_not_contains: String
+  planetName_starts_with: String
+  planetName_not_starts_with: String
+  planetName_ends_with: String
+  planetName_not_ends_with: String
+  AND: [StationWhereInput!]
+  OR: [StationWhereInput!]
+  NOT: [StationWhereInput!]
 }
 
-input PlanetWhereUniqueInput {
+input StationWhereUniqueInput {
   id: ID
 }
 
-type Query {
-  planet(where: PlanetWhereUniqueInput!): Planet
-  planets(where: PlanetWhereInput, orderBy: PlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Planet]!
-  planetsConnection(where: PlanetWhereInput, orderBy: PlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlanetConnection!
-  node(id: ID!): Node
-}
-
 type Subscription {
-  planet(where: PlanetSubscriptionWhereInput): PlanetSubscriptionPayload
+  station(where: StationSubscriptionWhereInput): StationSubscriptionPayload
 }
 `
       }
