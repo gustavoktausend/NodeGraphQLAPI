@@ -109,9 +109,18 @@ export type StationOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type StationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface StationCreateInput {
+  id?: Maybe<ID_Input>;
+  planetName: String;
+}
+
+export interface StationUpdateInput {
+  planetName?: Maybe<String>;
+}
+
+export interface StationUpdateManyMutationInput {
+  planetName?: Maybe<String>;
+}
 
 export interface StationWhereInput {
   id?: Maybe<ID_Input>;
@@ -147,19 +156,6 @@ export interface StationWhereInput {
   NOT?: Maybe<StationWhereInput[] | StationWhereInput>;
 }
 
-export interface StationCreateInput {
-  id?: Maybe<ID_Input>;
-  planetName: String;
-}
-
-export interface StationUpdateInput {
-  planetName?: Maybe<String>;
-}
-
-export interface StationUpdateManyMutationInput {
-  planetName?: Maybe<String>;
-}
-
 export interface StationSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -171,8 +167,106 @@ export interface StationSubscriptionWhereInput {
   NOT?: Maybe<StationSubscriptionWhereInput[] | StationSubscriptionWhereInput>;
 }
 
+export type StationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  planetName?: Maybe<String>;
+}>;
+
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface AggregateStation {
+  count: Int;
+}
+
+export interface AggregateStationPromise
+  extends Promise<AggregateStation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateStationSubscription
+  extends Promise<AsyncIterator<AggregateStation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface StationPreviousValues {
+  id: ID_Output;
+  planetName: String;
+}
+
+export interface StationPreviousValuesPromise
+  extends Promise<StationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  planetName: () => Promise<String>;
+}
+
+export interface StationPreviousValuesSubscription
+  extends Promise<AsyncIterator<StationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  planetName: () => Promise<AsyncIterator<String>>;
+}
+
+export interface StationEdge {
+  node: Station;
+  cursor: String;
+}
+
+export interface StationEdgePromise extends Promise<StationEdge>, Fragmentable {
+  node: <T = StationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface StationEdgeSubscription
+  extends Promise<AsyncIterator<StationEdge>>,
+    Fragmentable {
+  node: <T = StationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface StationSubscriptionPayload {
+  mutation: MutationType;
+  node: Station;
+  updatedFields: String[];
+  previousValues: StationPreviousValues;
+}
+
+export interface StationSubscriptionPayloadPromise
+  extends Promise<StationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = StationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = StationPreviousValuesPromise>() => T;
+}
+
+export interface StationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<StationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = StationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = StationPreviousValuesSubscription>() => T;
 }
 
 export interface Station {
@@ -243,109 +337,18 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface StationEdge {
-  node: Station;
-  cursor: String;
-}
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
-export interface StationEdgePromise extends Promise<StationEdge>, Fragmentable {
-  node: <T = StationPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface StationEdgeSubscription
-  extends Promise<AsyncIterator<StationEdge>>,
-    Fragmentable {
-  node: <T = StationSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateStation {
-  count: Int;
-}
-
-export interface AggregateStationPromise
-  extends Promise<AggregateStation>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateStationSubscription
-  extends Promise<AsyncIterator<AggregateStation>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface StationSubscriptionPayload {
-  mutation: MutationType;
-  node: Station;
-  updatedFields: String[];
-  previousValues: StationPreviousValues;
-}
-
-export interface StationSubscriptionPayloadPromise
-  extends Promise<StationSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = StationPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = StationPreviousValuesPromise>() => T;
-}
-
-export interface StationSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<StationSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = StationSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = StationPreviousValuesSubscription>() => T;
-}
-
-export interface StationPreviousValues {
-  id: ID_Output;
-  planetName: String;
-}
-
-export interface StationPreviousValuesPromise
-  extends Promise<StationPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  planetName: () => Promise<String>;
-}
-
-export interface StationPreviousValuesSubscription
-  extends Promise<AsyncIterator<StationPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  planetName: () => Promise<AsyncIterator<String>>;
-}
+export type Long = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -356,8 +359,6 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
-
-export type Long = string;
 
 /**
  * Model Metadata

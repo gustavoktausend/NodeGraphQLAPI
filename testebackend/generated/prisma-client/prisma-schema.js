@@ -141,6 +141,7 @@ input StationWhereInput {
 
 input StationWhereUniqueInput {
   id: ID
+  planetName: String
 }
 
 type Subscription {
