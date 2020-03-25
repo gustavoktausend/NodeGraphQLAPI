@@ -4,15 +4,16 @@ const typeDefs = require('./schema/schema');
 const resolvers = require('./schema/resolvers');
 const PlanetAPI = require('./resources/PlanetAPI');
 
-async function main() {
-
+// esse async é desnecessário
+// já que não temos nenhum await ali dentro
+function main() {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        dataSources: () => {
-            return { planetAPI: new PlanetAPI() }
-        },
-        context: {prisma,},
+        dataSources: () => ({
+            planetAPI: new PlanetAPI()
+        }),
+        context: { prisma },
     });
 
     server.listen().then(({ url }) => {
