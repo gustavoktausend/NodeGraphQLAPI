@@ -1,5 +1,4 @@
 type Station {
     id: ID! @id
-    # como comentado em resources/PlanetAPI.js linha 17
     planetName: String! @unique
 }

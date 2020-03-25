@@ -4,8 +4,6 @@ const typeDefs = require('./schema/schema');
 const resolvers = require('./schema/resolvers');
 const PlanetAPI = require('./resources/PlanetAPI');
 
-// esse async é desnecessário
-// já que não temos nenhum await ali dentro
 function main() {
     const server = new ApolloServer({
         typeDefs,
@@ -22,4 +20,4 @@ function main() {
 
 }
 
-main().catch(e => console.error(e));
+main();
